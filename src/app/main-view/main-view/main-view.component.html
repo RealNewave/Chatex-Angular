@@ -1,0 +1,17 @@
+<div>
+  <button type="button" class="btn btn-primary m-auto" data-bs-toggle="modal" data-bs-target="#login-modal">
+    Login
+  </button>
+  <app-login class="modal fade" role="dialog" id="login-modal"></app-login>
+  <app-new-question class="modal fade" role="dialog" id="question-modal"></app-new-question>
+  <button type="button" class="btn btn-primary m-auto" data-bs-toggle="modal" data-bs-target="#question-modal">
+    Ask Question
+  </button>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-4 col-lg-2 mt-3" *ngFor="let question of questions">
+        <app-subject-card [question]=question></app-subject-card>
+      </div>
+    </div>
+  </div>
+</div>

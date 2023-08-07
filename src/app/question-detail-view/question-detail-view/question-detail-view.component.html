@@ -1,0 +1,30 @@
+<button type="button" class="btn btn-primary m-auto" [routerLink]="'/'">
+  Back
+</button>
+<div class="text-center">
+  <h3 class="display-3 text-info">{{question}}</h3>
+  <small class="h6">started by: {{starter}}</small>
+</div>
+<div class="mx-4 overflow-auto" style="height: 80vh">
+  <div class="row">
+    <div class="col-12 my-2" *ngFor="let answer of answers">
+      <app-message-view [answer]="answer"></app-message-view>
+    </div>
+  </div>
+</div>
+<div class="row my-2 mx-2 sticky-bottom">
+  <div class="col-9 pe-0">
+    <form [formGroup]="replyForm">
+      <input type="text" class="form-control" placeholder="What would you like to say?" formControlName="reply">
+    </form>
+    <!--             (change)=""{(event) => setAnswer(event.target.value)}-->
+    <!--      onKeyDown={event => {-->
+    <!--      if (event.key === "Enter") {-->
+    <!--      event.preventDefault();-->
+    <!--      sendAnswer();-->
+    <!--      }-->
+  </div>
+  <div class="col-3 ps-1">
+    <button class="btn btn-primary w-100 " type="submit" (click)="sendResponse()">Send</button>
+  </div>
+</div>
