@@ -14,6 +14,7 @@ import {routes} from "./app-routing.module";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./service/AuthInterceptor";
 import {ReactiveFormsModule} from "@angular/forms";
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     QuestionDetailViewComponent,
     SubjectCardComponent,
     NewQuestionComponent,
-    MessageViewComponent
+    MessageViewComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

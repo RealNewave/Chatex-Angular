@@ -4,7 +4,7 @@ import {Question} from "../../domain/Question";
 @Component({
   selector: 'app-subject-card',
   templateUrl: './subject-card.component.html',
-  styleUrls: ['./subject-card.component.css']
+  styleUrls: ['./subject-card.component.scss']
 })
 export class SubjectCardComponent {
 

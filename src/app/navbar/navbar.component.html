@@ -1,0 +1,28 @@
+<nav class="navbar bg-body-tertiary" >
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">Threadly</a>
+    <li class="nav-item">
+      <a href="#" class="nav-link " data-bs-toggle="modal" data-bs-target="#question-modal">
+        Ask Question
+      </a>
+      <app-new-question class="modal fade" role="dialog" id="question-modal"></app-new-question>
+    </li>
+
+    <li class="nav-item" [ngClass]="{'dropdown': !username}">
+      <a *ngIf="!username;else loggedIn" href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#login-modal">
+        Login
+      </a>
+      <ng-template #loggedIn>
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{username}}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#" (click)="logout()">Logout</a></li>
+        </ul>
+      </ng-template>
+
+
+      <app-login class="modal fade" role="dialog" id="login-modal"></app-login>
+    </li>
+  </div>
+</nav>

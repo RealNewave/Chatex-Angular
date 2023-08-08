@@ -4,10 +4,13 @@ import {Answer} from "../../domain/Answer";
 @Component({
   selector: 'app-message-view',
   templateUrl: './message-view.component.html',
-  styleUrls: ['./message-view.component.css']
+  styleUrls: ['./message-view.component.scss']
 })
 export class MessageViewComponent {
 
   @Input()
-  public answer!: Answer;
+  public answer: Answer;
+
+  @Input()
+  public color: string | undefined;
 }
