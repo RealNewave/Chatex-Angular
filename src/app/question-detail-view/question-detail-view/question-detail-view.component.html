@@ -1,15 +1,16 @@
 <div class="text-center">
-  <h3 class="display-3 text-info">{{question}}</h3>
-  <small class="h6">started by: {{starter}}</small>
+  <h5 class="display-5 text-bg-success bg-opacity-50">{{question}}</h5>
+  <small class="h6 text-success opacity-50">started by: {{starter}}</small>
+
 </div>
-<div class="mx-4 overflow-auto" style="height: 80vh">
+<div class="mx-4 px-4 overflow-y-auto overflow-x-hidden snap" style="height: 78vh">
   <div class="row">
-    <div class="col-12 my-2" *ngFor="let answer of combinedAnswers">
+    <div class="col-8 my-2" *ngFor="let answer of combinedAnswers" [ngClass]="{'ms-auto': isOwnMessage(answer.username)}">
       <app-message-view [answer]="answer" [color]="usernameColors.get(answer.username)"></app-message-view>
     </div>
   </div>
 </div>
 <form [formGroup]="replyForm" role="search" class="d-flex my-3 mx-4 sticky-bottom">
   <input type="text" class="form-control me-2" placeholder="What would you like to say?" formControlName="reply">
-  <button class="btn btn-primary " type="submit" (click)="sendResponse()">Send</button>
+  <button class="btn btn-primary" type="submit" (click)="sendResponse()">Send</button>
 </form>

@@ -22,7 +22,11 @@ export class NewQuestionComponent {
   createQuestion() {
     if (this.questionForm.valid) {
       this.questionService.createQuestion(this.questionForm.controls.question.value!).subscribe({
-        next: response => this.closeModal.nativeElement.click()
+        next: response => {
+          this.closeModal.nativeElement.click();
+          //TODO: replace with component reload or something
+          window.location.reload();
+        }
       });
     }
   }

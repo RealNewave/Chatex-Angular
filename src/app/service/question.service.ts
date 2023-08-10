@@ -15,7 +15,7 @@ export class QuestionService {
   }
 
   createQuestion(subject: string): Observable<Question> {
-    return this.httpClient.post<Question>(this.BASE_URL + "/questions/", subject);
+    return this.httpClient.post<Question>(this.BASE_URL + "/questions/", {subject});
   }
 
   getQuestions(params: HttpParams): Observable<Question[]> {

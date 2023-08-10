@@ -5,10 +5,11 @@
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-      <form [formGroup]="questionForm">
+      <form [formGroup]="questionForm" role="search">
         <label for="subject" class="form-label">What is your question?</label>
         <input id="subject" class="form-control" type="text" formControlName="question"/>
       </form>
+
     </div>
     <div class="modal-footer">
       <button class="btn btn-primary" type="submit" (click)="createQuestion()">Create</button>

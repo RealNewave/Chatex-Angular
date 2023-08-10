@@ -3,6 +3,8 @@ import {Question} from "../../domain/Question";
 import {QuestionService} from "../../service/question.service";
 import {FormBuilder} from "@angular/forms";
 import {HttpParams} from "@angular/common/http";
+import {debounceTime, distinctUntilChanged} from "rxjs";
+import {ZonedDateTime} from "@js-joda/core";
 
 @Component({
   selector: 'app-main-view',
@@ -10,6 +12,8 @@ import {HttpParams} from "@angular/common/http";
   styleUrls: ['./main-view.component.scss']
 })
 export class MainViewComponent implements OnInit {
+
+  loading: boolean = true;
 
   questions: Question[] = [];
 
@@ -21,19 +25,30 @@ export class MainViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getQuestions();
+    this.getQuestions("");
+    this.searchForm.controls.search.valueChanges.pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe(searchValue => this.getQuestions(searchValue)
+    )
+
   }
 
 
-  getQuestions() {
+  getQuestions(searchValue: string | null) {
+
     let params = new HttpParams();
-    const searchValue = this.searchForm.controls.search.value;
     if (searchValue) {
       params = params.set("question", searchValue);
     }
 
     this.questionService.getQuestions(params).subscribe({
-      next: response => this.questions = response
+      next: response => {
+        this.questions = response;
+        //TODO: fix ZonedDateTime parsing
+        // this.questions.sort((a, b) => a.updated.isAfter(b.updated) ? -1 : 1);
+        this.loading = false;
+      },
+      error: () => {this.loading = false},
+      complete: () => {this.loading = false}
     });
   }
 }

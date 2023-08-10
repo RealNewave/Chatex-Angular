@@ -1,7 +1,14 @@
-<div class="card" style="border: solid 1px {{color}}">
-  <div class="card-body">
-    <pre class="card-text">{{answer.answer}}</pre>
+<div class="card rounded-5" style="border: solid 1px {{color}}">
+
+  <div class="card-body row">
+
+    <pre class="card-text col-9">{{answer.answer}}</pre>
+    <div class="col-3 d-flex flex-column" style="border-left: solid 1px {{color}}">
+    <small [style.color]="color">
+      {{answer.username}}
+    </small>
+    <small class="text-body-secondary">{{answer.timestamp}}</small>
+      </div>
   </div>
-  <small
-    class="card-footer text-body-secondary">{{answer.username}} | {{answer.timestamp}}</small>
+
 </div>

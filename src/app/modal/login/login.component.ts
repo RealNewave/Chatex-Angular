@@ -29,7 +29,11 @@ export class LoginComponent {
 
       this.questionService.login(this.loginForm.controls.username.value!, this.loginForm.controls.password.value!)
         .subscribe({
-          next: response => this.closeModal.nativeElement.click()
+          next: response => {
+            this.closeModal.nativeElement.click();
+            //TODO: replace with component reload or something
+            window.location.reload();
+          }
         });
     }
   }

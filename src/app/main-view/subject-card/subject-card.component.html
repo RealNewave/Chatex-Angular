@@ -1,17 +1,21 @@
-<div class="card h-100 selected">
-<!--  <img class="card-img-top bg-secondary" ngSrc="../../logo.svg" fill="colour"/>-->
-  <div class="card-img-top bg-info bg-gradient" style="width: 100%; height: 100px"></div>
+<div class="card h-100 border" [style.border-color]="color">
+  <!--  <img class="card-img-top bg-secondary" ngSrc="../../logo.svg" fill="colour"/>-->
+  <div class="card-img-top" style="width: 100%; height: 100px;" [style.background-color]="color">
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+            [style.background-color]="color">
+    {{question.answers.length}}
+      </span>
+  </div>
   <div class="card-body">
     <h5 class="card-title">
       {{question.question}}
     </h5>
-    <div class="card-text">
-      <p class="messages">Answers: {{question.answers.length}}</p>
-<!--      {/*<div class="usercount">Users: {question.responders.length}</div>*/}-->
+    <div class="card-subtitle align-self-end">
+      <div class="opacity-50">Participants:</div>
+      <u>{{question.starter}}</u><span *ngIf="participantSet.size < 5 && participantSet.size > 0">, </span>
+      <span *ngIf="participantSet.size < 5; else compact">{{getParticipants()}}</span>
+      <ng-template #compact> and {{participantSet.size}} others</ng-template>
     </div>
-    <p class="card-subtitle">
-      <span class="opacity-50">Started by: </span><u>{{question.starter}}</u>
-    </p>
     <a class="stretched-link" [routerLink]="'/' + question.id"></a>
   </div>
 </div>

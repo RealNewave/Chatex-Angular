@@ -12,14 +12,17 @@ export class QuestionWebsocketService {
   }
 
   connect(questionId: string):Observable<Answer> {
-    this.socket = new WebSocket(`ws://localhost:8080/api/v1/questions/${questionId}/${localStorage.getItem("username")}`, );
+    this.socket = new WebSocket(`ws://localhost:8080/api/v1/questions/${questionId}/${localStorage.getItem("username")}`);
     return new Observable(observer =>{
       this.socket.onmessage = (event) => observer.next(JSON.parse(event.data));
       this.socket.onerror = (event) => observer.error(event);
       this.socket.onclose = () => observer.complete();
-
     });
 
+  }
+
+  disconnect(questionId: string){
+    this.socket.close();
   }
 
   answerQuestion(questionId: string, answer: string): void {
