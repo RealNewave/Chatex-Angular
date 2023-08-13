@@ -1,3 +1,4 @@
+daemon off;
 # Heroku dynos have at least 4 cores.
 worker_processes <%= ENV['NGINX_WORKERS'] || 4 %>;
 
@@ -9,7 +10,7 @@ events {
 
 http {
   server {
-    listen $PORT;
+    listen <%= ENV["PORT"] %>;
     root /usr/share/nginx/html;
     index index.html;
 
