@@ -18,13 +18,15 @@
           {{username}}
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
           <li><a class="dropdown-item" href="#" (click)="logout()">Logout</a></li>
         </ul>
       </ng-template>
-
 
       <app-login class="modal fade" role="dialog" id="login-modal"></app-login>
     </li>
     </ul>
   </div>
 </nav>
+
+<h3 class="text-center text-danger">{{message}}</h3>

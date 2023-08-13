@@ -1,16 +1,20 @@
-<div class="text-center">
-  <h5 class="display-5 text-bg-success bg-opacity-50">{{question}}</h5>
-  <small class="h6 text-success opacity-50">started by: {{starter}}</small>
-
+<div class="text-center row text-bg-success bg-opacity-50">
+  <h5 class="col-10 display-5 "> <small class="h6">{{starter}} asks: </small>{{question}}</h5>
+  <div class="col-2 display-5"><i class="bi bi-lock"></i></div>
 </div>
-<div class="mx-4 px-4 overflow-y-auto overflow-x-hidden snap" style="height: 78vh">
+<div class="mx-4 px-4 overflow-y-auto overflow-x-hidden" style="height: 78vh">
   <div class="row">
-    <div class="col-8 my-2" *ngFor="let answer of answers" [ngClass]="{'ms-auto': isOwnMessage(answer.username)}">
-      <app-message-view [answer]="answer" [color]="usernameColors.get(answer.username)"></app-message-view>
+    <div *ngFor="let answer of answers; let i = index">
+      <div class="text-center" *ngIf="i == 0 || i > 0 && splitTimestamp(answer.timestamp)[0] != splitTimestamp(answers[i - 1].timestamp)[0]">
+        {{splitTimestamp(answer.timestamp)[0]}}
+      </div>
+      <div class="col-10 my-2" [ngClass]="{'ms-auto': isOwnMessage(answer.username)}">
+        <app-message-view [answer]="answer" [time]="splitTimestamp(answer.timestamp)[1]" [color]="usernameColors.get(answer.username)"/>
+      </div>
     </div>
   </div>
 </div>
-<form [formGroup]="replyForm" role="search" class="d-flex my-3 mx-4 sticky-bottom">
-  <input type="text" class="form-control me-2" placeholder="What would you like to say?" formControlName="reply">
+<form [formGroup]="replyForm" class="d-flex my-3 mx-4 sticky-bottom">
+  <textarea rows="2" autofocus  [style.resize]="'none'" type="text" class="form-control me-2"  placeholder="What would you like to say?" formControlName="reply"></textarea>
   <button class="btn btn-primary" type="submit" (click)="sendResponse()">Send</button>
 </form>

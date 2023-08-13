@@ -16,6 +16,6 @@
       <span *ngIf="participantSet.size < 5; else compact">{{getParticipants()}}</span>
       <ng-template #compact> and {{participantSet.size}} others</ng-template>
     </div>
-    <a class="stretched-link" [routerLink]="'/' + question.id"></a>
+    <a class="stretched-link" [routerLink]="'/question/' + question.id"></a>
   </div>
 </div>

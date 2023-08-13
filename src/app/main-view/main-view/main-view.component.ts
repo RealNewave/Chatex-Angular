@@ -8,8 +8,7 @@ import {ZonedDateTime} from "@js-joda/core";
 
 @Component({
   selector: 'app-main-view',
-  templateUrl: './main-view.component.html',
-  styleUrls: ['./main-view.component.scss']
+  templateUrl: './main-view.component.html'
 })
 export class MainViewComponent implements OnInit {
 

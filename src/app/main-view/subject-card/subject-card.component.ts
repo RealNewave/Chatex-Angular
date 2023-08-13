@@ -3,8 +3,7 @@ import {Question} from "../../domain/Question";
 
 @Component({
   selector: 'app-subject-card',
-  templateUrl: './subject-card.component.html',
-  styleUrls: ['./subject-card.component.scss']
+  templateUrl: './subject-card.component.html'
 })
 export class SubjectCardComponent implements OnInit{
 
@@ -27,6 +26,6 @@ export class SubjectCardComponent implements OnInit{
     return `rgb(${red}, ${green}, ${blue})`;
   }
 
-  private setParticipants = () => this.question.answers.forEach(answer => answer.username === localStorage.getItem("username") ? null : this.participantSet.add(" " + answer.username));
+  private setParticipants = () => this.question.answers.forEach(answer => answer.username === this.question.starter ? null : this.participantSet.add(" " + answer.username));
   getParticipants = (): string[] => Array.from(this.participantSet);
 }

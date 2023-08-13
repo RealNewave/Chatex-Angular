@@ -8,8 +8,7 @@ import {ZonedDateTime} from "@js-joda/core";
 
 @Component({
   selector: 'app-question-detail-view',
-  templateUrl: './question-detail-view.component.html',
-  styleUrls: ['./question-detail-view.component.scss']
+  templateUrl: './question-detail-view.component.html'
 })
 export class QuestionDetailViewComponent implements OnInit, OnDestroy {
   question: string = "";
@@ -77,6 +76,15 @@ export class QuestionDetailViewComponent implements OnInit, OnDestroy {
       });
     });
   }
+
+  public splitTimestamp(timestamp: string): string[] {
+    const splitTimeStamp = timestamp.split("T")
+    const date = splitTimeStamp[0];
+    const time = splitTimeStamp[1].split(".")[0];
+    return [date, time];
+  }
+
+  sameDate = (date1: string, date2: string) => date1 === date2;
 
 
 

@@ -1,12 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Answer} from "../../domain/Answer";
 
 @Component({
   selector: 'app-message-view',
-  templateUrl: './message-view.component.html',
-  styleUrls: ['./message-view.component.scss']
+  templateUrl: './message-view.component.html'
 })
-export class MessageViewComponent implements OnInit{
+export class MessageViewComponent {
 
   @Input()
   public answer: Answer;
@@ -14,12 +13,7 @@ export class MessageViewComponent implements OnInit{
   @Input()
   public color: string | undefined;
 
-  public date: string;
+  @Input()
   public time: string;
 
-  ngOnInit(): void {
-    const splitTimeStamp = this.answer.timestamp.split("T");
-    this.date = splitTimeStamp[0];
-    this.time = splitTimeStamp[1].split(".")[0];
-  }
 }
