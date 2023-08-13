@@ -37,11 +37,11 @@ export class QuestionDetailViewComponent implements OnInit, OnDestroy {
       this.questionWebsocketService.connect(this.questionId).subscribe({
         next: (message) => {
           const answer = message as Answer;
-          const latestCombinedAnswer = this.combinedAnswers[this.combinedAnswers.length - 1];
-          if(latestCombinedAnswer && answer.username === latestCombinedAnswer.username && answer.timestamp === latestCombinedAnswer.timestamp) {
-            latestCombinedAnswer.answer += "\n" + answer.answer;
-            this.combinedAnswers[this.combinedAnswers.length - 1] = latestCombinedAnswer;
-          }
+          // const latestCombinedAnswer = this.combinedAnswers[this.combinedAnswers.length - 1];
+          // if(latestCombinedAnswer && answer.username === latestCombinedAnswer.username && answer.timestamp === latestCombinedAnswer.timestamp) {
+          //   latestCombinedAnswer.answer += "\n" + answer.answer;
+          //   this.combinedAnswers[this.combinedAnswers.length - 1] = latestCombinedAnswer;
+          // }
           this.answers.push(answer);
         },
         error: (error) => console.log(error)
@@ -51,27 +51,27 @@ export class QuestionDetailViewComponent implements OnInit, OnDestroy {
           this.question = response.question;
           this.answers = response.answers;
           this.starter = response.starter;
-
-          for (let i = 0; i < this.answers.length - 1; i++) {
-            const currentValue = this.answers[i];
-            let nextValue = this.answers[i + 1];
-            let answer = currentValue.answer;
-            while (currentValue.username === nextValue.username && currentValue.timestamp === nextValue.timestamp) {
-
-              answer += "\n" + nextValue.answer;
-              i++;
-              nextValue = this.answers[i + 1] ? this.answers[i+1]: {
-                "username": "",
-                "answer": "",
-                "timestamp": ZonedDateTime.now()
-              } as Answer;
-            }
-            this.combinedAnswers.push({
-              "username": currentValue.username,
-              "answer": answer,
-              "timestamp": currentValue.timestamp
-            } as Answer);
-          }
+          // TODO: It does not work properly
+          // for (let i = 0; i < this.answers.length - 1; i++) {
+          //   const currentValue = this.answers[i];
+          //   let nextValue = this.answers[i + 1];
+          //   let answer = currentValue.answer;
+          //   while (currentValue.username === nextValue.username && currentValue.timestamp === nextValue.timestamp) {
+          //
+          //     answer += "\n" + nextValue.answer;
+          //     i++;
+          //     nextValue = this.answers[i + 1] ? this.answers[i+1]: {
+          //       "username": "",
+          //       "answer": "",
+          //       "timestamp": ZonedDateTime.now()
+          //     } as Answer;
+          //   }
+          //   this.combinedAnswers.push({
+          //     "username": currentValue.username,
+          //     "answer": answer,
+          //     "timestamp": currentValue.timestamp
+          //   } as Answer);
+          // }
           this.assignColors();
         }
       });
@@ -81,7 +81,7 @@ export class QuestionDetailViewComponent implements OnInit, OnDestroy {
 
 
   private assignColors() {
-    this.combinedAnswers.forEach(answer => {
+    this.answers.forEach(answer => {
       if (!this.usernameColors.has(answer.username)) {
         const generatedColor = this.generateRandomLightColor();
         this.usernameColors.set(answer.username, generatedColor);

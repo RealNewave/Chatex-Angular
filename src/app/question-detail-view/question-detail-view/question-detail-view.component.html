@@ -5,7 +5,7 @@
 </div>
 <div class="mx-4 px-4 overflow-y-auto overflow-x-hidden snap" style="height: 78vh">
   <div class="row">
-    <div class="col-8 my-2" *ngFor="let answer of combinedAnswers" [ngClass]="{'ms-auto': isOwnMessage(answer.username)}">
+    <div class="col-8 my-2" *ngFor="let answer of answers" [ngClass]="{'ms-auto': isOwnMessage(answer.username)}">
       <app-message-view [answer]="answer" [color]="usernameColors.get(answer.username)"></app-message-view>
     </div>
   </div>
