@@ -11,7 +11,7 @@ events {
 http {
   server {
     listen <%= ENV["PORT"] %>;
-    root /usr/share/nginx/html;
+    root /dist/chatex-angular;
     index index.html;
 
     location / {
