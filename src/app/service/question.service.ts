@@ -9,7 +9,7 @@ import {Question} from "../domain/Question";
 })
 export class QuestionService {
 
-  BASE_URL = "https://chatex-backend.onrender.com/api/v1";
+  BASE_URL = "https://chatex-quarkus-c3dd3ae78963.herokuapp.com/api/v1";
 
   constructor(private httpClient: HttpClient) {
   }
