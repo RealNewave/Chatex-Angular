@@ -2,17 +2,16 @@
 
 FROM node:latest as build
 
-WORKDIR /usr/local/app
+WORKDIR /dist/src/app
 
-COPY ./ /usr/local/app/
-
+COPY . .
 RUN npm install
-
 RUN npm run build
 
 FROM nginx:latest
 
-COPY --from=build /usr/local/app/dist/sample-angular-app /usr/share/nginx/html
+COPY --from=build /dist/src/app/chatex-angular /usr/share/nginx/html
+COPY /nginx.conf  /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
