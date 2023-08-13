@@ -12,7 +12,7 @@ export class QuestionWebsocketService {
   }
 
   connect(questionId: string):Observable<Answer> {
-    this.socket = new WebSocket(`ws://chatex-quarkus-c3dd3ae78963.herokuapp.com/api/v1questions/${questionId}/${localStorage.getItem("username")}`);
+    this.socket = new WebSocket(`ws://chatex-quarkus.onrender.com/api/v1questions/${questionId}/${localStorage.getItem("username")}`);
     return new Observable(observer =>{
       this.socket.onmessage = (event) => observer.next(JSON.parse(event.data));
       this.socket.onerror = (event) => observer.error(event);
