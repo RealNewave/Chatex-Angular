@@ -1,23 +1,23 @@
-<div class="container text-center mt-3">
-  <form class="w-100 d-flex" role="search" [formGroup]="searchForm">
-      <div class="input-group">
-        <span class="input-group-text"><i class="bi bi-search"></i></span>
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-               formControlName="search">
-      </div>
+<div class="container text-center mt-4">
+  <form class="d-flex" role="search" [formGroup]="searchForm">
+    <div class="col-5 btn-group text-start me-2" role="group">
+      <input type="radio" class="btn-check" name="answered" id="all" autocomplete="off" formControlName="answered" value="all">
+      <label class="btn btn-outline-secondary" for="all">All</label>
+      <input type="radio" class="btn-check" name="answered" id="open" autocomplete="off" formControlName="answered" value="open">
+      <label class="btn btn-outline-secondary" for="open">Open</label>
+      <input type="radio" class="btn-check" name="answered" id="closed" autocomplete="off" formControlName="answered" value="closed">
+      <label class="btn btn-outline-secondary" for="closed">Closed</label>
+    </div>
 
-      <div class="col-2 btn-group text-start" role="group">
-        <input type="radio" class="btn-check" name="answered" id="all" autocomplete="off" formControlName="answered" value="all">
-        <label class="btn btn-outline-secondary" for="all">All</label>
-        <input type="radio" class="btn-check" name="answered" id="open" autocomplete="off" formControlName="answered" value="open">
-        <label class="btn btn-outline-secondary" for="open">Open</label>
-        <input type="radio" class="btn-check" name="answered" id="closed" autocomplete="off" formControlName="answered" value="closed">
-        <label class="btn btn-outline-secondary" for="closed">Closed</label>
-      </div>
+    <div class="input-group">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search"
+               formControlName="search">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+    </div>
   </form>
   <div class="row" *ngIf="!loading;else loader">
-    <div class="col-lg-3 col-md-4 col-sm-6 mt-3" *ngFor="let question of questions">
-      <app-subject-card class="selected" [question]=question></app-subject-card>
+    <div class="col-lg-3 col-md-4 col-sm-6 mt-4" *ngFor="let question of questions">
+      <app-subject-card [question]=question></app-subject-card>
     </div>
   </div>
   <ng-template #loader>
