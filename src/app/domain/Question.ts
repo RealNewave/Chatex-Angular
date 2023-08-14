@@ -7,5 +7,6 @@ export type Question = {
   question: string
   answers: Answer[]
   timestamp: ZonedDateTime,
-  updated: ZonedDateTime
+  updated: ZonedDateTime,
+  answered: boolean
 }

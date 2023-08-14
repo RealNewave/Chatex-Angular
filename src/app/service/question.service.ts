@@ -9,7 +9,8 @@ import {Question} from "../domain/Question";
 })
 export class QuestionService {
 
-  BASE_URL = "https://chatex-quarkus.onrender.com/api/v1";
+  // BASE_URL = "https://chatex-quarkus.onrender.com/api/v1";
+  BASE_URL = "http://localhost:8080/api/v1";
 
   constructor(private httpClient: HttpClient) {
   }
@@ -24,6 +25,10 @@ export class QuestionService {
 
   getQuestion(questionId: string): Observable<Question> {
     return this.httpClient.get<Question>(this.BASE_URL + "/questions/" + questionId);
+  }
+
+  closeQuestion(questionId: string): Observable<void> {
+    return this.httpClient.post<void>(this.BASE_URL + "/questions/" + questionId + "/close", {});
   }
 
   login(username: string, password: string): Observable<void> {

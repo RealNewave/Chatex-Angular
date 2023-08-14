@@ -15,6 +15,7 @@ export class QuestionDetailViewComponent implements OnInit, OnDestroy {
   answers: Answer[] = [];
   starter: string = "";
   questionId: string = "";
+  answered: boolean = false;
   minBrightness = 70;
   maxBrightness = 100;
   usernameColors: Map<string, string> = new Map();
@@ -50,6 +51,7 @@ export class QuestionDetailViewComponent implements OnInit, OnDestroy {
           this.question = response.question;
           this.answers = response.answers;
           this.starter = response.starter;
+          this.answered = response.answered;
           // TODO: It does not work properly
           // for (let i = 0; i < this.answers.length - 1; i++) {
           //   const currentValue = this.answers[i];
@@ -114,6 +116,12 @@ export class QuestionDetailViewComponent implements OnInit, OnDestroy {
   sendResponse() {
     this.questionWebsocketService.answerQuestion(this.questionId, this.replyForm.controls.reply.value!);
     this.replyForm.controls.reply.reset();
+  }
+
+  closeQuestion(){
+    this.questionService.closeQuestion(this.questionId).subscribe({
+      next: () => this.answered = true
+    });
   }
 
   ngOnDestroy(): void {
