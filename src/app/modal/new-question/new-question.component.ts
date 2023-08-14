@@ -4,8 +4,7 @@ import {QuestionService} from "../../service/question.service";
 
 @Component({
   selector: 'app-new-question',
-  templateUrl: './new-question.component.html',
-  styleUrls: ['./new-question.component.css']
+  templateUrl: './new-question.component.html'
 })
 export class NewQuestionComponent {
 

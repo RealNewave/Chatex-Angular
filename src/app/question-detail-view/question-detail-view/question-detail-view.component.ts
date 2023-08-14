@@ -5,7 +5,6 @@ import {Answer} from "../../domain/Answer";
 import {QuestionWebsocketService} from "../../service/question-websocket.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ZonedDateTime} from "@js-joda/core";
-
 @Component({
   selector: 'app-question-detail-view',
   templateUrl: './question-detail-view.component.html'
@@ -19,11 +18,9 @@ export class QuestionDetailViewComponent implements OnInit, OnDestroy {
   minBrightness = 70;
   maxBrightness = 100;
   usernameColors: Map<string, string> = new Map();
-
   replyForm = this.formBuilder.group({
     reply: ["", [Validators.required]]
   });
-
 
   constructor(private formBuilder: FormBuilder, private questionService: QuestionService, private activatedRoute: ActivatedRoute, private questionWebsocketService: QuestionWebsocketService) {
   }
@@ -31,7 +28,6 @@ export class QuestionDetailViewComponent implements OnInit, OnDestroy {
   combinedAnswers: Answer[] = [];
 
   ngOnInit(): void {
-
     this.activatedRoute.params.subscribe(params => {
       this.questionId = params["questionId"];
       this.questionWebsocketService.connect(this.questionId).subscribe({
@@ -52,27 +48,10 @@ export class QuestionDetailViewComponent implements OnInit, OnDestroy {
           this.answers = response.answers;
           this.starter = response.starter;
           this.answered = response.answered;
-          // TODO: It does not work properly
-          // for (let i = 0; i < this.answers.length - 1; i++) {
-          //   const currentValue = this.answers[i];
-          //   let nextValue = this.answers[i + 1];
-          //   let answer = currentValue.answer;
-          //   while (currentValue.username === nextValue.username && currentValue.timestamp === nextValue.timestamp) {
-          //
-          //     answer += "\n" + nextValue.answer;
-          //     i++;
-          //     nextValue = this.answers[i + 1] ? this.answers[i+1]: {
-          //       "username": "",
-          //       "answer": "",
-          //       "timestamp": ZonedDateTime.now()
-          //     } as Answer;
-          //   }
-          //   this.combinedAnswers.push({
-          //     "username": currentValue.username,
-          //     "answer": answer,
-          //     "timestamp": currentValue.timestamp
-          //   } as Answer);
-          // }
+          if(this.answered){
+            this.replyForm.controls.reply.setValue("This question has been closed by the starter...");
+            this.replyForm.disable();
+          }
           this.assignColors();
         }
       });
@@ -85,10 +64,6 @@ export class QuestionDetailViewComponent implements OnInit, OnDestroy {
     const time = splitTimeStamp[1].split(".")[0];
     return [date, time];
   }
-
-  sameDate = (date1: string, date2: string) => date1 === date2;
-
-
 
   private assignColors() {
     this.answers.forEach(answer => {
@@ -118,13 +93,20 @@ export class QuestionDetailViewComponent implements OnInit, OnDestroy {
     this.replyForm.controls.reply.reset();
   }
 
-  closeQuestion(){
-    this.questionService.closeQuestion(this.questionId).subscribe({
-      next: () => this.answered = true
-    });
+  closeQuestion(response: boolean){
+    if(response) {
+      this.questionService.closeQuestion(this.questionId).subscribe({
+        next: () => this.answered = true
+      });
+    }
   }
 
   ngOnDestroy(): void {
     this.questionWebsocketService.disconnect(this.questionId);
+  }
+
+  addEmoji(event: any) {
+    const reply = this.replyForm.controls.reply;
+    reply.setValue(reply.value + event.emoji.native);
   }
 }

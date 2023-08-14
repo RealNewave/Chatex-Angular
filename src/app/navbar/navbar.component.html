@@ -1,12 +1,12 @@
 <nav class="navbar bg-body-tertiary" >
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">Threadly</a>
+    <a class="navbar-brand" routerLink="/">Chatex</a>
     <ul class="nav">
     <li class="nav-item">
       <a href="#" class="nav-link " data-bs-toggle="modal" data-bs-target="#question-modal">
         Ask Question <span><i class="bi bi-plus-circle"></i></span>
       </a>
-      <app-new-question class="modal fade" role="dialog" id="question-modal"></app-new-question>
+      <app-new-question class="modal fade" role="dialog" id="question-modal"/>
     </li>
 
     <li class="nav-item" [ngClass]="{'dropdown': !username}">
@@ -23,7 +23,7 @@
         </ul>
       </ng-template>
 
-      <app-login class="modal fade" role="dialog" id="login-modal"></app-login>
+      <app-login class="modal fade" role="dialog" id="login-modal"/>
     </li>
     </ul>
   </div>

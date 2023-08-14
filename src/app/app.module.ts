@@ -16,6 +16,8 @@ import {AuthInterceptor} from "./service/AuthInterceptor";
 import {ReactiveFormsModule} from "@angular/forms";
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProfileComponent } from './profile/profile.component';
+import {PickerComponent} from "@ctrl/ngx-emoji-mart";
+import {CloseQuestionComponent} from "./modal/close-question/close-question.component";
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { ProfileComponent } from './profile/profile.component';
     NewQuestionComponent,
     MessageViewComponent,
     NavbarComponent,
-    ProfileComponent
+    ProfileComponent,
+    CloseQuestionComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { ProfileComponent } from './profile/profile.component';
     NgOptimizedImage,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PickerComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

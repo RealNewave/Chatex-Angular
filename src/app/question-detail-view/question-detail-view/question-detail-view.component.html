@@ -1,7 +1,11 @@
-<div class="text-center row text-bg-success bg-opacity-50">
-  <h5 class="col-10 display-5 "> <small class="h6">{{starter}} asks: </small>{{question}}</h5>
-  <div *ngIf="!answered" class="col-2 display-5" (click)="closeQuestion()"><i class="bi bi-question"></i></div>
-  <div *ngIf="answered" class="d-block col-2 display-5"><i class="bi bi-check-circle"></i></div>
+<app-close-question (dataEvent)="closeQuestion($event)" id="close-modal" class="modal fade" role="dialog"/>
+<div class="container-fluid">
+
+<div class="text-center row text-bg-success bg-opacity-50 align-items-center">
+  <small class="h6 col-2">{{starter}} asks: </small>
+  <h5 class="col-9 display-5">{{question}}</h5>
+  <button type="button" *ngIf="!answered" class="btn btn-outline-light col-1 fs-6" data-bs-toggle="modal" data-bs-target="#close-modal"><span class="d-none d-lg-inline">Close question </span><i class="bi bi-unlock"></i></button>
+  <div *ngIf="answered" class="col-1 fs-6"><span class="d-none d-lg-inline">Closed </span><i class="bi bi-lock"></i></div>
 </div>
 <div class="mx-4 px-4 overflow-y-auto overflow-x-hidden" style="height: 78vh">
   <div class="row">
@@ -16,6 +20,15 @@
   </div>
 </div>
 <form [formGroup]="replyForm" class="d-flex my-3 mx-4 sticky-bottom">
+  <div class="btn-group dropup me-2" >
+    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" [disabled]="answered">
+      <i class="bi bi-emoji-smile"></i>
+    </button>
+    <ul class="dropdown-menu p-0">
+      <emoji-mart class="emoji-mart" (emojiSelect)="addEmoji($event)" title="Choose your emoji"/>
+    </ul>
+  </div>
   <textarea rows="2" autofocus  [style.resize]="'none'" type="text" class="form-control me-2"  placeholder="What would you like to say?" formControlName="reply"></textarea>
-  <button class="btn btn-primary" type="submit" (click)="sendResponse()">Send</button>
+  <button class="btn btn-primary" type="submit" (click)="sendResponse()" [disabled]="answered">Send</button>
 </form>
+</div>
