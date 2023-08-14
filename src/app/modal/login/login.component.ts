@@ -14,6 +14,7 @@ export class LoginComponent {
     username: ["", [Validators.required]],
     password: ["", [Validators.required]]
   });
+  public userExists: boolean;
 
   constructor(private formBuilder: FormBuilder, private questionService: QuestionService) {
   }
@@ -40,7 +41,8 @@ export class LoginComponent {
     if(this.loginForm.valid) {
       this.questionService.createResponder(this.loginForm.controls.username.value!, this.loginForm.controls.password.value!)
         .subscribe({
-          next: response => this.login()
+          next: response => this.login(),
+          error: error => this.userExists = true
         });
     }
   }

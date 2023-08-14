@@ -7,11 +7,12 @@
       <div class="modal-body">
         <form [formGroup]="loginForm">
         <label for="username" class="form-label">Username</label>
-        <input id="username" type="text" class="form-control" formControlName="username"/>
-
+        <input id="username" type="text" class="form-control" formControlName="username" required/>
 
         <label for="password" class="form-label">Password</label>
-        <input id="password" type="password" class="form-control" formControlName="password"/>
+        <input id="password" type="password" class="form-control" formControlName="password" required/>
+
+        <div *ngIf="userExists" class="text-danger">Username is already taken!</div>
         </form>
       </div>
       <div class="modal-footer">

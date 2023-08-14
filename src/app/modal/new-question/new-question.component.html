@@ -8,13 +8,15 @@
       <form [formGroup]="questionForm" role="search">
         <label for="subject" class="form-label">What is your question?</label>
         <input id="subject" class="form-control" type="text" formControlName="question"/>
+        <div *ngIf="createFailed" class="text-danger">Are you logged in?</div>
+
       </form>
 
     </div>
     <div class="modal-footer">
       <button class="btn btn-primary" type="submit" (click)="createQuestion()">Create</button>
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" #closeModal>
-      Close
+        Close
       </button>
     </div>
   </div>
