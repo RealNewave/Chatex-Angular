@@ -9,8 +9,8 @@ import {Question} from "../domain/Question";
 })
 export class QuestionService {
 
-  // BASE_URL = "https://chatex-quarkus.onrender.com/api/v1";
-  BASE_URL = "http://localhost:8080/api/v1";
+  BASE_URL = "https://chatex-quarkus.onrender.com/api/v1";
+  // BASE_URL = "http://localhost:8080/api/v1";
 
   constructor(private httpClient: HttpClient) {
   }
