@@ -13,9 +13,9 @@
     </h4>
     <small class="card-subtitle p-0 fst-italic">
       <small class="d-block opacity-50">Participants:</small>
-      <u>{{question.starter}}</u><span *ngIf="participantSet.size < 5 && participantSet.size > 0">, </span>
-      <span *ngIf="participantSet.size < 5; else compact">{{getParticipants()}}</span>
-      <ng-template #compact> and {{participantSet.size}} others</ng-template>
+      <u>{{question.starter}}</u><span *ngIf="question.responders.length < 5 && question.responders.length > 0">, </span>
+      <span *ngIf="question.responders.length < 5; else compact">{{responders}}</span>
+      <ng-template #compact> and {{question.responders.length}} others</ng-template>
     </small>
     <a class="stretched-link" [routerLink]="'/question/' + question.id"></a>
   </div>

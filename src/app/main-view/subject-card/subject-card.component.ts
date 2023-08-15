@@ -8,14 +8,13 @@ import {Question} from "../../domain/Question";
 export class SubjectCardComponent implements OnInit{
 
   @Input()
-  public question: Question;
-
-  participantSet: Set<string> = new Set();
+  question: Question;
   color: string;
+  responders: string;
 
 
   ngOnInit(): void {
-    this.setParticipants();
+    this.responders = this.question.responders.map(responder => responder.username).join(", ");
     this.color = this.generateRandomColor();
   }
 
@@ -25,7 +24,4 @@ export class SubjectCardComponent implements OnInit{
     const blue = Math.floor(Math.random() * 256);
     return `rgb(${red}, ${green}, ${blue})`;
   }
-
-  private setParticipants = () => this.question.answers.forEach(answer => answer.username === this.question.starter ? null : this.participantSet.add(" " + answer.username));
-  getParticipants = (): string[] => Array.from(this.participantSet);
 }
