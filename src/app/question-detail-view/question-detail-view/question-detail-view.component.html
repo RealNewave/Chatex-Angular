@@ -1,33 +1,46 @@
-<app-close-question (dataEvent)="closeQuestion($event)" id="close-modal" class="modal fade" role="dialog"/>
-<div class="container-fluid">
-<div class="text-center row text-bg-success bg-opacity-50 align-items-center">
-  <small class="h6 col-2">{{starter}} asks: </small>
-  <h5 class="col-9 display-5">{{question}}</h5>
-  <button type="button" *ngIf="!answered" class="btn btn-outline-light col-1 fs-6" data-bs-toggle="modal" data-bs-target="#close-modal"><span class="d-none d-lg-inline">Close question </span><i class="bi bi-unlock"></i></button>
-  <div *ngIf="answered" class="col-1 fs-6"><span class="d-none d-lg-inline">Closed </span><i class="bi bi-lock"></i></div>
-</div>
-<div class="mx-4 px-4 overflow-y-auto overflow-x-hidden" style="height: 78vh">
-  <div class="row">
-    <div *ngFor="let answer of answers; let i = index">
-      <div class="text-center" *ngIf="i == 0 || i > 0 && splitTimestamp(answer.timestamp)[0] != splitTimestamp(answers[i - 1].timestamp)[0]">
-        {{splitTimestamp(answer.timestamp)[0]}}
-      </div>
-      <div class="col-10 my-2" [ngClass]="{'ms-auto': isOwnMessage(answer.username)}">
-        <app-message-view [answer]="answer" [time]="splitTimestamp(answer.timestamp)[1]" [color]="usernameColors.get(answer.username)"/>
+<div class="container-fluid h-100">
+  <div class="row text-bg-success bg-opacity-50 align-items-center">
+    <div class="col-2"></div>
+    <h5 class="col display-5 text-center">{{question}}</h5>
+    <div class="col-2">
+      <button type="button" *ngIf="!answered" class="btn btn-outline-light fs-6 " data-bs-toggle="modal"
+              data-bs-target="#close-modal"><span class="d-none d-lg-inline">Close question </span><i
+        class="bi bi-unlock"></i></button>
+      <div *ngIf="answered" class="col-2 fs-6"><span class="d-none d-lg-inline">Closed </span><i class="bi bi-lock"></i>
       </div>
     </div>
   </div>
-</div>
-<form [formGroup]="replyForm" class="d-flex my-3 mx-4 sticky-bottom">
-  <div class="btn-group dropup me-2" >
-    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" [disabled]="answered">
-      <i class="bi bi-emoji-smile"></i>
-    </button>
-    <ul class="dropdown-menu p-0">
-      <emoji-mart class="emoji-mart" (emojiSelect)="addEmoji($event)" title="Choose your emoji"/>
-    </ul>
+  <div class="row" style="height: 75vh">
+    <div class="overflow-y-auto overflow-x-hidden h-100">
+      <div *ngFor="let answer of answers; let i = index">
+        <div class="text-center"
+             *ngIf="i == 0 || i > 0 && splitTimestamp(answer.timestamp)[0] != splitTimestamp(answers[i - 1].timestamp)[0]">
+          {{splitTimestamp(answer.timestamp)[0]}}
+        </div>
+        <div class="col-10 my-2" [ngClass]="{'ms-auto': isOwnMessage(answer.username)}">
+          <app-message-view [answer]="answer" [time]="splitTimestamp(answer.timestamp)[1]"
+                            [color]="usernameColors.get(answer.username)"/>
+        </div>
+      </div>
+    </div>
   </div>
-  <textarea rows="2" autofocus  [style.resize]="'none'" type="text" class="form-control me-2"  placeholder="What would you like to say?" formControlName="reply"></textarea>
-  <button class="btn btn-primary" type="submit" (click)="sendResponse()" [disabled]="answered">Send</button>
-</form>
+  <div class="row mt-2">
+    <form [formGroup]="replyForm">
+      <div class="d-flex">
+        <div class="btn-group dropup me-2">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                  data-bs-auto-close="outside" aria-expanded="false" [disabled]="answered">
+            <i class="bi bi-emoji-smile"></i>
+          </button>
+          <ul class="dropdown-menu p-0">
+            <emoji-mart class="emoji-mart" (emojiSelect)="addEmoji($event)" title="Choose your emoji"/>
+          </ul>
+        </div>
+        <textarea rows="2" autofocus [style.resize]="'none'" type="text" class="form-control me-2"
+                  placeholder="What would you like to say?" formControlName="reply"></textarea>
+        <button class="btn btn-primary" type="submit" (click)="sendResponse()" [disabled]="answered">Send</button>
+      </div>
+    </form>
+  </div>
 </div>
+<app-close-question (dataEvent)="closeQuestion($event)" id="close-modal" class="modal fade" role="dialog"/>
