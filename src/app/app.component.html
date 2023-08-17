@@ -1,2 +1,7 @@
 <app-navbar/>
+<button #openUsernameModal class="d-none" data-bs-toggle="modal" data-bs-target="#username-modal">
+</button>
+<app-provide-username/>
+<div *ngIf="hasUsername()">
 <router-outlet/>
+</div>

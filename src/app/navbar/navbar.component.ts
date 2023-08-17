@@ -1,23 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent {
 
   username: string | null = localStorage.getItem("username");
-
-  message: string;
-
-  ngOnInit() {
-    if(!this.username || !localStorage.getItem("token")){
-      this.message = "You should login first!";
-    } else {
-      this.message = "";
-    }
-  }
 
   logout(){
     localStorage.removeItem("username");
@@ -25,5 +15,4 @@ export class NavbarComponent implements OnInit{
     //TODO: replace with component reload or something
     window.location.reload();
   }
-
 }

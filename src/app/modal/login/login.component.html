@@ -1,24 +1,26 @@
+<div class="modal fade" role="dialog" id="login-modal" data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="login-modal-title">Login or create an account</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form [formGroup]="loginForm">
-        <label for="username" class="form-label">Username</label>
-        <input id="username" type="text" class="form-control" formControlName="username" required/>
+          <label for="username" class="form-label">Username</label>
+          <input id="username" type="text" class="form-control" formControlName="username" required/>
 
-        <label for="password" class="form-label">Password</label>
-        <input id="password" type="password" class="form-control" formControlName="password" required/>
+          <label for="password" class="form-label">Password</label>
+          <input id="password" type="password" class="form-control" formControlName="password" required/>
 
-        <div *ngIf="userExists" class="text-danger">Username is already taken!</div>
+          <div *ngIf="userExists" class="text-danger">Username is already taken!</div>
         </form>
       </div>
       <div class="modal-footer">
         <button class="btn btn-primary" type="submit" (click)="login()">Login</button>
         <button class="btn btn-primary" type="submit" (click)="create()">Create</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" #closeModal>Cancel</button>
+
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-target="#username-modal" data-bs-toggle="modal" #closeModal>Cancel</button>
       </div>
     </div>
   </div>
+</div>

@@ -19,11 +19,6 @@ export class LoginComponent {
   constructor(private formBuilder: FormBuilder, private questionService: QuestionService) {
   }
 
-  public close(): void {
-    // Close the modal
-    this.closeModal.nativeElement.click();
-  }
-
   login() {
     if(this.loginForm.valid) {
 

@@ -17,7 +17,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProfileComponent } from './profile/profile.component';
 import {PickerComponent} from "@ctrl/ngx-emoji-mart";
-import {CloseQuestionComponent} from "./modal/close-question/close-question.component";
+import {ProvideUsernameComponent} from "./modal/provide-username/provide-username.component";
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import {CloseQuestionComponent} from "./modal/close-question/close-question.comp
     MessageViewComponent,
     NavbarComponent,
     ProfileComponent,
-    CloseQuestionComponent
+    ProvideUsernameComponent
   ],
   imports: [
     BrowserModule,

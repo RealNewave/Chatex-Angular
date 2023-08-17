@@ -1,0 +1,24 @@
+<div class="modal fade" id="username-modal" role="dialog" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="login-modal-title">No username provided</h1>
+      </div>
+      <div class="modal-body">
+        <p>
+          You are either not logged in or need to provide a username to join a public conversation
+        </p>
+        <label for="username-input" class="form-label">Provide a username</label>
+        <input id="username-input" class="form-control" type="text" #username required>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" type="submit" data-bs-dismiss="modal" (click)="setUsername(username.value)">
+          Submit
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-target="#login-modal" data-bs-toggle="modal">
+          Login
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

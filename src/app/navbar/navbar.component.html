@@ -3,10 +3,10 @@
     <ul class="nav align-items-center d-flex justify-content-between">
       <a class="navbar-brand ms-3" routerLink="/">Chatex</a>
       <li class="nav-item">
-        <button href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#question-modal">
+        <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#question-modal">
           New Question <span><i class="bi bi-broadcast-pin"></i></span>
         </button>
-        <app-new-question class="modal fade" role="dialog" id="question-modal"/>
+        <app-new-question/>
       </li>
 
       <li class="nav-item" [ngClass]="{'dropdown': !username}">
@@ -25,10 +25,8 @@
           </ul>
         </ng-template>
 
-        <app-login class="modal fade" role="dialog" id="login-modal"/>
+        <app-login/>
       </li>
     </ul>
   </nav>
 </div>
-
-<h3 class="text-center text-danger">{{message}}</h3>

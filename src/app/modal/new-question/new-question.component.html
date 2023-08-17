@@ -1,3 +1,4 @@
+<div class="modal fade" role="dialog" id="question-modal">
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
@@ -9,18 +10,12 @@
         <label for="subject" class="form-label">What is your question?</label>
         <input id="subject" class="form-control" type="text" formControlName="question"/>
         <div *ngIf="createFailed" class="text-danger">Are you logged in?</div>
-        <label for="usernames" class="form-label mt-2">Who do you want to invite?</label>
-        <div class="overflow-y-auto" [style.height]="'10rem'">
-          <div id="usernames" *ngFor="let username of usernames; let i = index">
-            <div class="form-check">
-              <input id="checkbox-{{i}}" type="checkbox" (change)="updateAddedUsers($event, username)"
-                     class="form-check-input" [value]="username">
-              <label for="checkbox-{{i}}" class="form-check-label">{{username}}</label>
-            </div>
-          </div>
-        </div>
-        <div>{{questionForm.controls.usernames.getRawValue()}}</div>
 
+        <div class="form-check">
+          <input id="open-to-public" type="checkbox" formControlName="openToPublic" class="form-check-input">
+          <label for="open-to-public" class="form-check-label">Make question open to public</label>
+        </div>
+        <div *ngIf="questionForm.controls.openToPublic.value" class="text-warning">This means everyone without an account could can also join!</div>
       </form>
 
     </div>
@@ -31,4 +26,5 @@
       </button>
     </div>
   </div>
+</div>
 </div>

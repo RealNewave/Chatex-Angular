@@ -10,5 +10,6 @@ export type Question = {
   responders: Responder[]
   timestamp: ZonedDateTime,
   updated: ZonedDateTime,
-  answered: boolean
+  answered: boolean,
+  openToPublic: boolean
 }
