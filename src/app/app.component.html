@@ -1,7 +1,9 @@
-<app-navbar/>
-<button #openUsernameModal class="d-none" data-bs-toggle="modal" data-bs-target="#username-modal">
-</button>
-<app-provide-username/>
-<div *ngIf="hasUsername()">
-<router-outlet/>
+<div class="vh-100 vw-100">
+  <app-navbar/>
+  <button #openUsernameModal class="d-none" data-bs-toggle="modal" data-bs-target="#username-modal">
+  </button>
+  <app-provide-username/>
+  <div *ngIf="hasUsername()">
+    <router-outlet/>
+  </div>
 </div>

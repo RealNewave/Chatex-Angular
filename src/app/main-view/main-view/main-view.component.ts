@@ -1,10 +1,10 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Question} from "../../domain/Question";
 import {QuestionService} from "../../service/question.service";
 import {FormBuilder} from "@angular/forms";
 import {HttpParams} from "@angular/common/http";
 import {debounceTime, distinctUntilChanged} from "rxjs";
-import {ZonedDateTime} from "@js-joda/core";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-main-view',
@@ -17,17 +17,34 @@ export class MainViewComponent implements OnInit {
 
   searchForm = this.formBuilder.group({
     search: ["", []],
-    answered: ["all", []]
+    answered: ["", []]
   });
 
 
-  constructor(private formBuilder: FormBuilder, private questionService: QuestionService) {
+  constructor(private formBuilder: FormBuilder, private questionService: QuestionService,
+              private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
-    this.getQuestions("", "");
+    const queryParamMap = this.route.snapshot.queryParamMap;
+    let search = queryParamMap.get("search");
+    let answered = queryParamMap.get("answered");
+    this.getQuestions(search, answered);
+    this.searchForm.controls.search.setValue(search);
+    this.searchForm.controls.answered.setValue(answered);
     this.searchForm.valueChanges.pipe(debounceTime(400), distinctUntilChanged())
-      .subscribe(value => this.getQuestions(value.search, value.answered)
+      .subscribe(value => {
+        this.getQuestions(value.search, value.answered);
+        this.router.navigate(["/"], {
+          relativeTo: this.route,
+          queryParams: {
+            answered: value.answered,
+            search: value.search
+          },
+          queryParamsHandling: "merge",
+          skipLocationChange: false
+        })
+      }
     );
   }
 

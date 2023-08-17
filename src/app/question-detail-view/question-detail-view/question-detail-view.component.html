@@ -5,8 +5,13 @@
       </div>
   </div>
 </div>
-<div *ngIf="question; else loader" class="container-fluid h-100">
-    <div class="row text-bg-success bg-opacity-50 align-items-center">
+<ng-template #loader>
+  <div class="container text-center">
+    <div class=" mt-3 spinner-border"></div>
+  </div>
+</ng-template>
+<div *ngIf="question; else loader" class="container-fluid d-flex flex-column justify-content-between" [style.height]="'94vh'">
+    <div class="row text-bg-success bg-opacity-50 ">
         <div class="col-2"></div>
         <div class="col fs-4 text-center">{{question.question}}</div>
 
@@ -45,8 +50,7 @@
         </div>
 
     </div>
-    <div class="row" style="height: 75vh">
-        <div class="overflow-y-auto overflow-x-hidden h-100">
+    <div class="row h-100 overflow-y-auto overflow-x-hidden ">
             <div *ngFor="let answer of question.answers; let i = index">
                 <div class="text-center"
                      *ngIf="i == 0 || i > 0 && splitTimestamp(answer.timestamp)[0] != splitTimestamp(question.answers[i - 1].timestamp)[0]">
@@ -58,7 +62,6 @@
                 </div>
             </div>
         </div>
-    </div>
     <div class="row mt-2">
         <form [formGroup]="replyForm">
             <div class="d-flex">
@@ -80,9 +83,3 @@
         </form>
     </div>
 </div>
-<ng-template #loader>
-    <div class="container text-center">
-        <div class=" mt-3 spinner-border"></div>
-    </div>
-</ng-template>
-
